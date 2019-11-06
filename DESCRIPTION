@@ -1,0 +1,13 @@
+Package: GOTMr
+Title: Work with GOTM in R
+Version: 0.0.0.9000
+Authors@R: person("Tadhg", "Moore", email = "tadhg.moore@dkit.ie", role = c("aut", "cre"))
+Description: Run the General Ocean Turbulence Model (GOTM) through R. Comes with a compiled version of GOTM and uses wrapper functions to enable the calling of GOTM in R.
+Depends: R (>= 3.1.1)
+License: GPL3
+Encoding: UTF-8
+LazyData: true
+Imports: utils
+Suggests:
+RoxygenNote: 6.1.1
+Enhances: gotmtools

@@ -1,0 +1,43 @@
+!-------------------------------------------------------------------------------
+! observed stream profiles
+!-------------------------------------------------------------------------------
+! name   [string]
+!          name of stream
+! method [integer]
+!          inflow/outflow method
+!          1: surface flow
+!          2: bottom flow
+!          3: depth range
+!          4: interleaving - only for inflow
+! zl     [float]
+!          as a negative value
+!          This variable is only used if method = 3
+! zu     [float]
+!          as a negative value
+!          This variable is only used if method = 3
+! Q_file [string]
+!          filename of file with discharge data
+! S_file [string]
+!          filename of file with salinity data
+! T_file [string]
+!          filename of file with temperature data
+! Q_col  [integer]
+!          column in "Q_file" after timestamp
+! S_col  [integer]
+!          column in "S_file" after timestamp
+! T_col  [integer]
+!          column in "T_file" after timestamp
+!-------------------------------------------------------------------------------
+
+&stream
+   name = 'inflow',
+   method = 1,
+   zl = -0.0,
+   zu = -1.0,
+   Q_file = 'inflow.dat',
+   S_file = '',
+   T_file = 'inflow.dat',
+   Q_col = 1,
+   S_col = -1,
+   T_col = 2,
+/
