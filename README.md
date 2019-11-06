@@ -1,7 +1,3 @@
----
-output: github_document
----
-
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -22,6 +18,12 @@ You can install GOTMr from Github with:
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("tadhg-moore/GOTMr")
+```
+
+# For Linux users
+GOTM requires the libgfortran3 library so you will need to install this to get GOTM running. You can install this with:
+```
+sudo apt-get install libgfortran3
 ```
 
 ## Usage
