@@ -21,9 +21,9 @@
 run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', verbose = FALSE, args = character())
 {
   if (sum(file.exists(c(file.path(sim_folder, "airsea.nml"),
-                     file.path(sim_folder, "gotmrun.nml"),
-                     file.path(sim_folder, "gotmmean.nml"),
-                     file.path(sim_folder, "gotmturb.nml")))) != 4 & !yaml) {
+                        file.path(sim_folder, "gotmrun.nml"),
+                        file.path(sim_folder, "gotmmean.nml"),
+                        file.path(sim_folder, "gotmturb.nml")))) != 4 & !yaml) {
     stop("You must have a valid GOTM setup in your sim_folder: ",
          sim_folder)
   }
@@ -40,7 +40,7 @@ run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', ve
       stop('pre-mavericks mac OSX is not supported. Consider upgrading')
     }
 
-    return(run_gotmOSx(sim_folder, verbose, system.args))
+    return(run_gotmOSx(sim_folder, verbose, args))
 
   }
 
@@ -169,7 +169,7 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
 }
 
 ### macOS ###
-run_gotmOSx <- function(sim_folder, verbose, system.args){
+run_gotmOSx <- function(sim_folder, verbose, args){
   gotm_path <- system.file('exec/macgotm', package = 'GOTMr')
-  gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = system.args)
+  gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
 }
