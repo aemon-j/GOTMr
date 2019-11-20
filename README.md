@@ -17,7 +17,7 @@ You can install GOTMr from Github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("tadhg-moore/GOTMr")
+devtools::install_github("aemon-j/GOTMr")
 ```
 
 # For Linux users
