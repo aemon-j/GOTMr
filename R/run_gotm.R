@@ -45,6 +45,7 @@ run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', ve
   }
 
   if (.Platform$pkgType == "source") {
+    # return(run_gotmNIX(sim_folder, yaml = yaml, yaml_file = yaml_file, verbose, args))
     return(run_gotmNIX(sim_folder, verbose, args))
   }
 }
@@ -117,34 +118,44 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   })
 # }
 
-run_gotmNIX <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose=TRUE, args){
-  gotm_path <- system.file('exec/nixgotm', package=packageName())
+# run_gotmNIX <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose=TRUE, args){
+#   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
+#
+#   if(yaml){
+#     args <- c(args, yaml_file)
+#   }else{
+#     args <- c(args,'--read_nml')
+#   }
+#
+#   origin <- getwd()
+#   setwd(sim_folder)
+#   Sys.setenv(LD_LIBRARY_PATH=system.file('extbin/nixgotm',
+#                                          package='GOTMr'))
+#
+#   tryCatch({
+#     if (verbose){
+#       out <- system2(gotm_path, wait = TRUE, stdout = "",
+#                      stderr = "", args=args)
+#     } else {
+#       out <- system2(gotm_path, wait = TRUE, stdout = NULL,
+#                      stderr = NULL, args = args)
+#     }
+#     setwd(origin)
+#     return(out)
+#   }, error = function(err) {
+#     print(paste("GOTM_ERROR:  ",err))
+#     setwd(origin)
+#   })
+# }
 
-  if(yaml){
-    args <- c(args, yaml_file)
-  }else{
-    args <- c(args,'--read_nml')
-  }
-
+run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
   origin <- getwd()
   setwd(sim_folder)
-  Sys.setenv(LD_LIBRARY_PATH=system.file('extbin/nixgotm',
-                                         package=packageName()))
-
-  tryCatch({
-    if (verbose){
-      out <- system2(gotm_path, wait = TRUE, stdout = "",
-                     stderr = "", args=args)
-    } else {
-      out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-                     stderr = NULL, args = args)
-    }
-    setwd(origin)
-    return(out)
-  }, error = function(err) {
-    print(paste("GOTM_ERROR:  ",err))
-    setwd(origin)
-  })
+  gotm_path <- system.file('exec/nixgotm', package='GOTMr')
+  # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
+  out <- system2(gotm_path, args = args)
+  setwd(origin)
+  return(out)
 }
 
 ### From GLEON/gotm3r
