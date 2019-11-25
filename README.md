@@ -21,9 +21,10 @@ devtools::install_github("aemon-j/GOTMr")
 ```
 
 # For Linux users
-GOTM requires the libgfortran3 library so you will need to install this to get GOTM running. You can install this with:
+GOTM requires the libgfortran3 and libnetcdff6 libraries so you will need to install this to get GOTM running. You can install this with:
 ```
 sudo apt-get install libgfortran3
+sudo apt-get install libnetcdff6
 ```
 
 ## Usage
