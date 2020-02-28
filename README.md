@@ -21,9 +21,10 @@ devtools::install_github("aemon-j/GOTMr")
 ```
 
 # For Linux users
-GOTM requires the libgfortran3 library so you will need to install this to get GOTM running. You can install this with:
+GOTM requires the libgfortran3 and libnetcdff6 libraries so you will need to install this to get GOTM running. You can install this with:
 ```
 sudo apt-get install libgfortran3
+sudo apt-get install libnetcdff6
 ```
 
 ## Usage
@@ -324,15 +325,9 @@ example("run_gotm")
 
 ### Visualize
 
-You can download [PyNcView](http://sourceforge.net/projects/pyncview/) for viewing the netCDF output or you can download a set of accompanying tools for working with GOTM data in R [gotmtools](https://github.com/tadhg-moore/gotmtools).
+You can download [PyNcView](http://sourceforge.net/projects/pyncview/) for viewing the netCDF output or you can download a set of accompanying tools for working with GOTM data in R [gotmtools](https://github.com/aemon-j/gotmtools).
 
 ```{r eval=FALSE}
-library(gotmtools)
-out_file <- file.path(sim_folder, 'output.nc')
-plot_wtemp(file = out_file)
-```
-
-```{r echo=FALSE}
 library(gotmtools)
 out_file <- file.path(sim_folder, 'output.nc')
 plot_wtemp(file = out_file)
