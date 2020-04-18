@@ -1,0 +1,18 @@
+citHeader("To cite GOTMr in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Description of a flexible and extendable physical–biogeochemical model system for the water column",
+  author   = "Burchard, Hans and Bolding, Karsten and Kühn, Wilfried and Meister, Andreas and Neumann, Thomas and Umlauf, Lars",
+  journal  = "Journal of Marine Systems",
+  series = "Workshop on {Future} {Directions} in {Modelling} {Physical}-{Biological} {Interactions} ({WKFDPBI})",
+  year     = "2006",
+  volume   = "61",
+  number   = "3",
+  pages    = "180--211",
+  doi = "10.1016/j.jmarsys.2005.04.011",
+  textVersion = paste("Burchard, Hans, Karsten Bolding, Wilfried Kühn, Andreas Meister, Thomas Neumann, and Lars Umlauf.
+2006.", "Description of a Flexible and Extendable Physical–Biogeochemical Model System for the Water
+Column.", " Journal of Marine Systems,", " Workshop on Future Directions in Modelling Physical-Biological
+Interactions (WKFDPBI)", ", 61 (3): 180–211. ", "https://doi.org/10.1016/j.jmarsys.2005.04.011.")
+)
