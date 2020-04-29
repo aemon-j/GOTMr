@@ -152,6 +152,10 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
   origin <- getwd()
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
+  Sys.setenv(LD_LIBRARY_PATH=paste(system.file('extbin/nix', 
+                                               package=packageName()), 
+                                   Sys.getenv('LD_LIBRARY_PATH'), 
+                                   sep = ":"))
   # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
   out <- system2(gotm_path, args = args)
   setwd(origin)
