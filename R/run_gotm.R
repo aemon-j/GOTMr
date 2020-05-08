@@ -72,7 +72,8 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
       out <- system2(gotm_path, wait = TRUE, stdout = TRUE,
                      stderr = "", args=args)
     } else {
-      out <- system2(gotm_path, args=args)
+      out <- system2(gotm_path, stdout = NULL,
+                     stderr = NULL, args=args)
     }
     setwd(origin)
     return(out)
@@ -153,7 +154,20 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
   # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
-  out <- system2(gotm_path, args = args)
+  tryCatch({
+    if (verbose){
+      out <- system2(gotm_path, wait = TRUE, stdout = "",
+                     stderr = "", args = args)
+    } else {
+      out <- system2(gotm_path, wait = TRUE, stdout = NULL,
+                     stderr = NULL, args = args)
+    }
+    setwd(origin)
+    return(out)
+  }, error = function(err) {
+    print(paste("gotm_ERROR:  ",err))
+    setwd(origin)
+  })
   setwd(origin)
   return(out)
 }
