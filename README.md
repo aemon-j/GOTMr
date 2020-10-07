@@ -1,4 +1,4 @@
-[![zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4068321.svg)]
+![zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4068321.svg)
 
 GOTMr
 ====
