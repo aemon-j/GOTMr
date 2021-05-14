@@ -1,9 +1,6 @@
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  fig.path = "images/"
-)
-```
+
+[![R-CMD-check](https://github.com/tadhg-moore/GOTMr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadhg-moore/GOTMr/actions/workflows/R-CMD-check.yaml)
+[![](http://github-actions.40ants.com/tadhg-moore/GOTMr/matrix.svg)](https://github.com/tadhg-moore/GOTMr)
 
 GOTMr
 ====
