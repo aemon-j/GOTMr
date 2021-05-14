@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - lake
   pull_request:
     branches:
       - main
