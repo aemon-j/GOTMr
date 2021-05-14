@@ -1,6 +1,6 @@
 
-[![R-CMD-check](https://github.com/tadhg-moore/GOTMr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tadhg-moore/GOTMr/actions/workflows/R-CMD-check.yaml)
-[![](http://github-actions.40ants.com/tadhg-moore/GOTMr/matrix.svg)](https://github.com/tadhg-moore/GOTMr)
+[![R-CMD-check](https://github.com/aemon-j/GOTMr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/aemon-j/GOTMr/actions/workflows/R-CMD-check.yaml)
+[![](http://github-actions.40ants.com/aemon-j/GOTMr/matrix.svg)](https://github.com/aemon-j/GOTMr)
 
 GOTMr
 ====
