@@ -4,8 +4,13 @@
 \alias{run_gotm}
 \title{Run the GOTM model}
 \usage{
-run_gotm(sim_folder = ".", yaml = TRUE, yaml_file = "gotm.yaml",
-  verbose = FALSE, args = character())
+run_gotm(
+  sim_folder = ".",
+  yaml = TRUE,
+  yaml_file = "gotm.yaml",
+  verbose = FALSE,
+  args = character()
+)
 }
 \arguments{
 \item{sim_folder}{the directory where simulation files are contained}
