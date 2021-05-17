@@ -25,8 +25,8 @@ jobs:
         config:
           - {os: windows-latest, r: 'release'}
           - {os: macOS-10.14, r: 'release'}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-18.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-18.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -61,13 +61,14 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install libnetcdf-dev libnetcdff-dev
+          sudo apt-get install libgfortran3
           sudo apt-get install libc6
           sudo apt-get install libxml2-dev
           sudo apt-get install kst
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
       - name: Install macOS dependencies
         if: runner.os == 'macOS'
