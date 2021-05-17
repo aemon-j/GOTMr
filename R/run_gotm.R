@@ -69,10 +69,10 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 
   tryCatch({
     if (verbose){
-      out <- system2(gotm_path, wait = TRUE, stdout = TRUE,
+      out <- system2(gotm_path, wait = TRUE, stdout = "",
                      stderr = "", args=args)
     } else {
-      out <- system2(gotm_path, stdout = NULL,
+      out <- system2(gotm_path, wait = TRUE, stdout = NULL,
                      stderr = NULL, args=args)
     }
     setwd(origin)
