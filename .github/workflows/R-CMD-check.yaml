@@ -61,7 +61,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install libnetcdf-dev libnetcdff-dev
-          sudo apt-get install libgfortran3
           sudo apt-get install libc6
           sudo apt-get install libxml2-dev
           sudo apt-get install kst
