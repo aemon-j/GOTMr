@@ -61,6 +61,10 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install libnetcdf-dev libnetcdff-dev
+          sudo apt-get install libgfortran3
+          sudo apt-get install libc6
+          sudo apt-get install libxml2-dev
+          sudo apt-get install kst
           while read -r cmd
           do
             eval sudo $cmd
@@ -75,6 +79,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+          remotes::install_cran("xtable")
         shell: Rscript {0}
 
       - name: Check
