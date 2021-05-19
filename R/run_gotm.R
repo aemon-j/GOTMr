@@ -8,7 +8,7 @@
 #'@param yaml logical; If true will use 'gotm.yaml' file for set up otherwise it will use namelist files. Defaults to TRUE
 #'@param yaml_file filepath; to file with GOTM setup. Defaults to 'gotm.yaml'
 #'@param verbose Save output as character vector. Defaults to FALSE
-#'@param args Optional arguments to pass to GOTM executable
+#'@param system.args Optional arguments to pass to GOTM executable
 #'
 #'@keywords methods
 #'@author
@@ -18,7 +18,7 @@
 #'run_gotm(sim_folder)
 #'@export
 #'@importFrom utils packageName
-run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', verbose = FALSE, args = character())
+run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', verbose = FALSE, system.args = character())
 {
   if (sum(file.exists(c(file.path(sim_folder, "airsea.nml"),
                         file.path(sim_folder, "gotmrun.nml"),
@@ -28,7 +28,7 @@ run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', ve
          sim_folder)
   }
   if (.Platform$pkgType == "win.binary") {
-    return(run_gotmWin(sim_folder, yaml = yaml, yaml_file = yaml_file, verbose, args))
+    return(run_gotmWin(sim_folder, yaml = yaml, yaml_file = yaml_file, verbose, system.args))
   }
 
   ### macOS ###
@@ -40,17 +40,17 @@ run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', ve
       stop('pre-mavericks mac OSX is not supported. Consider upgrading')
     }
 
-    return(run_gotmOSx(sim_folder, verbose, args))
+    return(run_gotmOSx(sim_folder, verbose, system.args))
 
   }
 
   if (.Platform$pkgType == "source") {
-    # return(run_gotmNIX(sim_folder, yaml = yaml, yaml_file = yaml_file, verbose, args))
-    return(run_gotmNIX(sim_folder, verbose, args))
+    # return(run_gotmNIX(sim_folder, yaml = yaml, yaml_file = yaml_file, verbose, system.args))
+    return(run_gotmNIX(sim_folder, verbose, system.args))
   }
 }
 
-run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose = TRUE, args){
+run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose = TRUE, system.args){
 
   if(.Platform$r_arch == 'x64'){
     gotm_path <- system.file('extbin/win64GOTM/gotm.exe', package= 'GOTMr')
@@ -59,9 +59,9 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
   }
 
   if(yaml){
-    args <- c(args, yaml_file)
+    system.args <- c(system.args, yaml_file)
   }else{
-    args <- c(args,'--read_nml')
+    system.args <- c(system.args,'--read_nml')
   }
 
   origin <- getwd()
@@ -70,10 +70,10 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
   tryCatch({
     if (verbose){
       out <- system2(gotm_path, wait = TRUE, stdout = "",
-                     stderr = "", args=args)
+                     stderr = "", args=system.args)
     } else {
       out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-                     stderr = NULL, args=args)
+                     stderr = NULL, args=system.args)
     }
     setwd(origin)
     return(out)
@@ -83,7 +83,7 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
   })
 }
 
-# run_gotmOSx <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose = TRUE, args){
+# run_gotmOSx <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose = TRUE, system.args){
 #   #lib_path <- system.file('extbin/macGOTM/bin', package=packageName()) #Not sure if libraries needed for GOTM
 #
 #   gotm_path <- system.file('exec/macgotm', package=packageName())
@@ -92,9 +92,9 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   #Sys.setenv(DYLD_FALLBACK_LIBRARY_PATH=lib_path) #Libraries?
 #
 #   if(yaml){
-#     args <- c(args, yaml_file)
+#     system.args <- c(system.args, yaml_file)
 #   }else{
-#     args <- c(args,'--read_nml')
+#     system.args <- c(system.args,'--read_nml')
 #   }
 #
 #   origin <- getwd()
@@ -103,11 +103,11 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   tryCatch({
 #     if (verbose){
 #       out <- system2(gotm_path, wait = TRUE, stdout = "",
-#                      stderr = "", args = args)
+#                      stderr = "", args = system.args)
 #
 #     } else {
 #       out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-#                      stderr = NULL, args=args)
+#                      stderr = NULL, args=system.args)
 #     }
 #
 #     setwd(origin)
@@ -119,13 +119,13 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   })
 # }
 
-# run_gotmNIX <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose=TRUE, args){
+# run_gotmNIX <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose=TRUE, system.args){
 #   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
 #
 #   if(yaml){
-#     args <- c(args, yaml_file)
+#     system.args <- c(system.args, yaml_file)
 #   }else{
-#     args <- c(args,'--read_nml')
+#     system.args <- c(system.args,'--read_nml')
 #   }
 #
 #   origin <- getwd()
@@ -136,10 +136,10 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   tryCatch({
 #     if (verbose){
 #       out <- system2(gotm_path, wait = TRUE, stdout = "",
-#                      stderr = "", args=args)
+#                      stderr = "", args=system.args)
 #     } else {
 #       out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-#                      stderr = NULL, args = args)
+#                      stderr = NULL, args = system.args)
 #     }
 #     setwd(origin)
 #     return(out)
@@ -149,7 +149,7 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 #   })
 # }
 
-run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
+run_gotmNIX <- function(sim_folder, verbose=TRUE, system.args){
   origin <- getwd()
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
@@ -157,14 +157,14 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
                                                package=packageName()),
                                    Sys.getenv('LD_LIBRARY_PATH'),
                                    sep = ":"))
-  # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
+  # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = system.args)
   tryCatch({
     if (verbose){
       out <- system2(gotm_path, wait = TRUE, stdout = "",
-                     stderr = "", args = args)
+                     stderr = "", args = system.args)
     } else {
       out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-                     stderr = NULL, args = args)
+                     stderr = NULL, args = system.args)
     }
     setwd(origin)
     return(out)
@@ -217,7 +217,7 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
 }
 
 ### macOS ###
-run_gotmOSx <- function(sim_folder, verbose, args){
+run_gotmOSx <- function(sim_folder, verbose, system.args){
   gotm_path <- system.file('exec/macgotm', package = 'GOTMr')
-  gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
+  gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = system.args)
 }
