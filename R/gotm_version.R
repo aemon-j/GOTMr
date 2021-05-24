@@ -13,5 +13,5 @@
 #'
 #'@export
 gotm_version <- function(){
-  run_gotm(template_files(), verbose=FALSE, args='--version')
+  run_gotm(template_files(), verbose=FALSE, system.args = '--version')
 }

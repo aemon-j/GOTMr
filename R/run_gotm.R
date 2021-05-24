@@ -18,7 +18,8 @@
 #'run_gotm(sim_folder)
 #'@export
 #'@importFrom utils packageName
-run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml', verbose = FALSE, system.args = character())
+run_gotm <- function (sim_folder = ".", yaml = TRUE, yaml_file = 'gotm.yaml',
+                      verbose = FALSE, system.args = character())
 {
   if (sum(file.exists(c(file.path(sim_folder, "airsea.nml"),
                         file.path(sim_folder, "gotmrun.nml"),
@@ -84,9 +85,9 @@ run_gotmWin <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbos
 }
 
 # run_gotmOSx <- function(sim_folder, yaml = TRUE, yaml_file = 'gotm.yaml', verbose = TRUE, system.args){
-#   #lib_path <- system.file('extbin/macGOTM/bin', package=packageName()) #Not sure if libraries needed for GOTM
+#   #lib_path <- system.file('extbin/macGOTM/bin', package="GOTMr") #Not sure if libraries needed for GOTM
 #
-#   gotm_path <- system.file('exec/macgotm', package=packageName())
+#   gotm_path <- system.file('exec/macgotm', package="GOTMr")
 #
 #   # ship gotm and libs to sim_folder
 #   #Sys.setenv(DYLD_FALLBACK_LIBRARY_PATH=lib_path) #Libraries?
@@ -154,7 +155,7 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, system.args){
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
   Sys.setenv(LD_LIBRARY_PATH=paste(system.file('extbin/nix',
-                                               package=packageName()),
+                                               package="GOTMr"),
                                    Sys.getenv('LD_LIBRARY_PATH'),
                                    sep = ":"))
   # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = system.args)
@@ -183,7 +184,7 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
 
   ### macOS ###
   if (grepl("mac.binary",.Platform$pkgType)) {
-    dylib_path <- system.file("exec", package = packageName())
+    dylib_path <- system.file("exec", package = "GOTMr")
     tryCatch({
       if (verbose){
         out <- system2(gotm_path, wait = TRUE, stdout = "",
