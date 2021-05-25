@@ -9,7 +9,7 @@ run_gotm(
   yaml = TRUE,
   yaml_file = "gotm.yaml",
   verbose = FALSE,
-  args = character()
+  system.args = character()
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ run_gotm(
 
 \item{verbose}{Save output as character vector. Defaults to FALSE}
 
-\item{args}{Optional arguments to pass to GOTM executable}
+\item{system.args}{Optional arguments to pass to GOTM executable}
 }
 \description{
 This runs the GOTM model on the specific simulation stored in \code{sim_folder}.
