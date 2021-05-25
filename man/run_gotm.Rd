@@ -28,7 +28,7 @@ This runs the GOTM model on the specific simulation stored in \code{sim_folder}.
 The specified \code{sim_folder} must contain valid NML files.
 }
 \examples{
-sim_folder <- system.file('extdata', package = 'GOTMr')
+sim_folder <- system.file('extdata', package = "GOTMr")
 run_gotm(sim_folder)
 }
 \author{
