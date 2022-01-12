@@ -153,6 +153,10 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
   origin <- getwd()
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
+  Sys.setenv(LD_LIBRARY_PATH=paste(system.file('extbin/nix',
+                                               package=packageName()),
+                                   Sys.getenv('LD_LIBRARY_PATH'),
+                                   sep = ":"))
   # gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
   tryCatch({
     if (verbose){
@@ -177,20 +181,39 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
   origin <- getwd()
   setwd(sim_folder)
 
-  tryCatch({
-    if (verbose){
-      out <- system2(gotm_path, wait = TRUE, stdout = "",
-                     stderr = "", args = system.args)
-    } else {
-      out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-                     stderr = NULL, args = system.args)
-    }
-    setwd(origin)
-    return(out)
-  }, error = function(err) {
-    print(paste("gotm_ERROR:  ",err))
-    setwd(origin)
-  })
+  ### macOS ###
+  if (grepl("mac.binary",.Platform$pkgType)) {
+    dylib_path <- system.file("exec", package = "GOTMr")
+    tryCatch({
+      if (verbose){
+        out <- system2(gotm_path, wait = TRUE, stdout = "",
+                       stderr = "", args = system.args, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
+      } else {
+        out <- system2(gotm_path, wait = TRUE, stdout = NULL,
+                       stderr = NULL, args = system.args, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
+      }
+    }, error = function(err) {
+      print(paste("GOTM_ERROR:  ",err))
+    }, finally = {
+      setwd(origin)
+      return(out)
+    })
+  } else {
+    tryCatch({
+      if (verbose){
+        out <- system2(gotm_path, wait = TRUE, stdout = "",
+                       stderr = "", args = system.args)
+      } else {
+        out <- system2(gotm_path, wait = TRUE, stdout = NULL,
+                       stderr = NULL, args = system.args)
+      }
+    }, error = function(err) {
+      print(paste("GOTM_ERROR:  ",err))
+    }, finally = {
+      setwd(origin)
+      return(out)
+    })
+  }
 }
 
 ### macOS ###

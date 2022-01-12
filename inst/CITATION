@@ -1,0 +1,20 @@
+citHeader("To cite GOTMr in publications use:")
+
+citEntry(
+  entry    = "manual",
+  title    = "GOTM – Scientific Documentation",
+  author   = "Umlauf, Lars and Bolding, Karsten and Burchard, Hans",
+  series = "Marine Science Reports",
+  year     = "2005",
+  number   = "63",
+  language = "en",
+  version = {3.2},
+  note = "Please check up-to-date version on www.gotm.net",
+  organization = "Leibniz-Institute for Baltic Sea Research",
+  location = "Warnemuende, Germany",
+  url = "https://gotm.net/portfolio/documentation/",
+  textVersion = paste("Umlauf, L., K. Bolding, and H. Burchard. ", "GOTM – Scientific Documentation. Version 3.2. ",
+                      "No. 63 of Marine Science Reports, Leibniz-Institute for Baltic Sea Research, Warnemuende, Germany, ",
+                      "2005.(Please check up-to-date version on www.gotm.net).")
+)
+
