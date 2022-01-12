@@ -218,6 +218,6 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
 
 ### macOS ###
 run_gotmOSx <- function(sim_folder, verbose, args){
-  gotm_path <- system.file('exec/macgotm', package = 'GOTMr')
+  gotm_path <- system.file('exec/gotm', package = 'GOTMr')
   gotm.systemcall(sim_folder = sim_folder, gotm_path = gotm_path, verbose = verbose, system.args = args)
 }
