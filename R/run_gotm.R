@@ -183,14 +183,14 @@ gotm.systemcall <- function(sim_folder, gotm_path, verbose, system.args) {
 
   ### macOS ###
   if (grepl("mac.binary",.Platform$pkgType)) {
-    dylib_path <- system.file("exec", package = "GOTMr")
+#    dylib_path <- system.file("exec", package = "GOTMr")
     tryCatch({
       if (verbose){
         out <- system2(gotm_path, wait = TRUE, stdout = "",
-                       stderr = "", args = system.args, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
+                       stderr = "", args = system.args)#, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
       } else {
         out <- system2(gotm_path, wait = TRUE, stdout = NULL,
-                       stderr = NULL, args = system.args, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
+                       stderr = NULL, args = system.args)#, env = paste0("DYLD_LIBRARY_PATH=", dylib_path))
       }
     }, error = function(err) {
       print(paste("GOTM_ERROR:  ",err))
