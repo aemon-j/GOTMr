@@ -263,6 +263,7 @@ mimic_3d:                               # effects of horizontal gradients
          file:                          # path to file with time series [default=]
          column: 1                      # index of column to read from [default=1]
       adv_discr: 6                      # vertical advection scheme [1=first-order upstream, 3=third-order upstream-biased polynomial, 4=third-order TVD with Superbee limiter, 5=third-order TVD with MUSCL limiter, 6=third-order TVD with ULTIMATE QUICKEST limiter; default=6]
+water_balance_method: 0                 # 0=none, 1=surface, 2=all layers, 3=free surface, default=0
 velocities:                             # observed/prescribed horizontal velocities
    u:                                   # velocity in West-East direction
       method: 0                         # method [0=off, 2=from file; default=0]
