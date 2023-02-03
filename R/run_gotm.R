@@ -153,6 +153,8 @@ run_gotmNIX <- function(sim_folder, verbose=TRUE, args){
   origin <- getwd()
   setwd(sim_folder)
   gotm_path <- system.file('exec/nixgotm', package='GOTMr')
+  old_ld_path <- Sys.getenv('LD_LIBRARY_PATH')
+  on.exit(expr = {Sys.setenv(LD_LIBRARY_PATH = old_ld_path)})
   Sys.setenv(LD_LIBRARY_PATH=paste(system.file('extbin/nix',
                                                package=packageName()),
                                    Sys.getenv('LD_LIBRARY_PATH'),
